@@ -1,10 +1,14 @@
 Config = {}
 Config.Locale = 'en'
 
+-- Name of the Location | Type of MarketPlace | Coordinates of the Marker
 Config.Locations = {
-	{type = 'black' , pos = vector3(462.5275,-770.6901,27.34216)},
-	{type = 'black' , pos = vector3(1514.242,3784.352,34.45276)}
+	{name = 'LosSantos', type = 'black' , pos = vector3(462.5275,-770.6901,27.34216)},
+	{name = 'SandyShores', type = 'black' , pos = vector3(1514.242,3784.352,34.45276)}
 }
+
+-- Price to pay when buying a WareHouse
+Config.Price = 16000 
 
 -----------------------------------------------------------------------------------------------------------------
 Locales = {}
