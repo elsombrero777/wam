@@ -38,8 +38,10 @@ end)
 lib.callback.register('wam:isOnSale', function()
     local p = ESX.GetPlayerFromId(source)
     local seller_id = p.identifier
+    print(seller_id)
     local cb
     MySQL.single('SELECT onSale FROM wam WHERE seller_id = ?', {seller_id}, function(result)
+        print(json.encode(result, {indent = true}))
         cb = result.seller_id
     end)
     return cb
