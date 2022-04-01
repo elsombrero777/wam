@@ -2,8 +2,8 @@ ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 lib.versionCheck('elsombrero777/wam')
-if not lib.checkDependency('ox_lib', '2.0.2') then error('You don\'t have latest version of ox_lib') end
-if not lib.checkDependency('ox_inventory', '2.6.0') then error('You don\'t have latest version of ox_inventory') end
+if not lib.checkDependency('ox_lib', '2.1.0') then error('You don\'t have latest version of ox_lib') end
+if not lib.checkDependency('ox_inventory', '2.7.2') then error('You don\'t have latest version of ox_inventory') end
 
 --------------[ WAM ]--------------
 
@@ -13,9 +13,7 @@ AddEventHandler('onServerResourceStart', function(wam)
     for i = 1, #m, 1 do
         local id = 'wam_'..m[i].stash_id
         exports.ox_inventory:RegisterStash(id, m[i].place, Config.Slots, Config.Weight)
-    end    
-    --for i = 1, #m, 1 do
-    --    exports.ox_inventory:RegisterStash(m[1].id, )
+    end
 end)
 
 
