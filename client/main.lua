@@ -20,11 +20,11 @@ end
 
 function OpenMarket(id ,market)
     if market == 'black' then
-        TriggerEvent('wam:testMenu')
+        TriggerServerEvent('wam:soldOrNot')
     end
 end
 
-RegisterNetEvent('wam:testMenu', function()
+RegisterNetEvent('wam:blackMain', function()
     TriggerEvent('nh-context:createMenu', {
         {
             header = "BlackMarket",
@@ -36,22 +36,88 @@ RegisterNetEvent('wam:testMenu', function()
             server = true,
             event = 'wam:hasWarehouse'
         },
-        --[[{
-            header = "Browse the Marketplace",
-            context = "Look for great deals.",
+        {
+            header = "Collect your Money",
+            context = "All the money received from Sales",
+            event = 'wam:collectMoney',
+            disabled = true
+        },
+        {
+            header = "Browse the Market",
+            context = "Look for Items you might want to buy.",
             server = true,
-            event = 'wam:hasWarehouse',
+            event = 'wam:browseMarket'
+        }
+    })
+end)
+
+RegisterNetEvent('wam:blackMainC', function()
+    TriggerEvent('nh-context:createMenu', {
+        {
+            header = "BlackMarket",
+        },
+        {
+            header = "Your Warehouse",
+            context = "Open your Warehouse Menu.",
+            subMenu = true,
+            server = true,
+            event = 'wam:hasWarehouse'
+        },
+        {
+            header = "Collect your Money",
+            context = "All the money received from Sales",
+            server = true,
+            event = 'wam:collectMoney'
+        },
+        {
+            header = "Browse the Market",
+            context = "Look for Items you might want to buy.",
+            server = true,
+            event = 'wam:browseMarket'
+        }
+    })
+end)
+
+RegisterNetEvent('wam:bMarket', function(desc, price, s_id, id)
+    local n = 0
+    TriggerEvent('nh-context:createMenu', {
+        {
+            header = "Go Back",
+            context = "Return to the Main Menu",
+            subMenu = true,
+            event = 'wam:blackMain'
+        },
+        {
+            header = "Warehouse #" .. n+1,
+            context = desc,
+            footer = price .. '€',
+            event = 'wam:areYouSure',
             args = {
-                name
+                s_id, price, id
             }
         }
-        --[[{
-            header = "Browse the Market",
-            txt = "Look for Items you might want to buy.",
-            params = {
-                event = ''
+    })
+end)
+
+RegisterNetEvent('wam:areYouSure', function(s_id, price, id)
+    TriggerEvent('nh-context:createMenu', {
+        {
+            header = "Are you sure you want to buy this Lot?",
+            disabled = true
+        },
+        {
+            header = "Yes",
+            server = true,
+            event = 'wam:buyWarehouse',
+            args = {
+                s_id, price, id
             }
-        }]]--
+        },
+        {
+            header = "No",
+            server = true,
+            event = 'wam:browseMarket'
+        }
     })
 end)
 
@@ -97,7 +163,7 @@ RegisterNetEvent('wam:warehouseOptionsB', function()
             header = "Go Back",
             context = "Return to the Main Menu",
             subMenu = true,
-            event = 'wam:testMenu'
+            event = 'wam:blackMain'
         }
     })
 end)
@@ -126,7 +192,7 @@ RegisterNetEvent('wam:warehouseOptionsS', function(s_id)
             header = "Go Back",
             context = "Return to the Main Menu",
             subMenu = true,
-            event = 'wam:testMenu'
+            event = 'wam:blackMain'
         }
     })
 end)

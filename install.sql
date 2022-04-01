@@ -15,7 +15,13 @@ CREATE TABLE IF NOT EXISTS `wam` (
   `onSale` tinyint(2) NOT NULL DEFAULT 0 COMMENT 'Is this Warehouse on Sale?',
   PRIMARY KEY (`stash_id`),
   KEY `seller_id` (`seller_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COMMENT='Used for What A Marketplace in order to store the Seller ID, the Date of Creation, the Warehouse ID, the Price, the Description of the Package and if the Lot is on Sale.';
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COMMENT='Used for What A Marketplace in order to store the Seller ID, the Date of Creation, the Warehouse ID, the Price, the Description of the Package and if the Lot is on Sale.';
+
+CREATE TABLE IF NOT EXISTS `wam_sold` (
+  `seller_id` varchar(60) NOT NULL COMMENT 'Seller ID',
+  `collect` int(10) NOT NULL COMMENT 'The money to be collected after sale',
+  PRIMARY KEY (`seller_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Used for What A Marketplace in order to store the Seller ID and the Money to be collected from Sales.';
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
